@@ -2,6 +2,8 @@
 
 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 插件：在输入框右侧工具栏显示 OpenCode Go 套餐的剩余额度 —— 5 小时、一周、一个月三个窗口各一条进度条，鼠标悬停看已用比例、重置时间点和倒计时。
 
+![输入框工具栏上的 OpenCode Go 套餐余量胶囊，以及悬停展开后的三个窗口面板](docs/screenshots/quota-chip.jpg)
+
 ## 功能
 
 - 工具栏胶囊常驻，逐个窗口显示剩余百分比，按余量自动变色（充足 / 偏紧 / 告急）
