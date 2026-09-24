@@ -1,0 +1,12 @@
+# Runtime artifacts are committed on purpose: `dsh plugin add github:…/dsh-ocg-used`
+# installs this repository as-is and runs no build script, so `lib/index.js` and
+# `lib/client.js` must be present in the checkout.
+node_modules/
+lib/types/**/*.js
+lib/types/**/*.js.map
+lib/types/**/*.d.ts.map
+*.tsbuildinfo
+*.tgz
+coverage/
+*.log
+.DS_Store

@@ -1,0 +1,5 @@
+# Register the OpenCode Go quota plugin's Host half. The browser half ships as
+# this package's `./client` export and is discovered through `dsh.client`.
+- insert:
+    - id: ocg-used
+      name: 'dsh-ocg-used'
