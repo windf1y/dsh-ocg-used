@@ -1,0 +1,174 @@
+/* Composer-toolbar quota chip. Semantic aliases only: the chip inherits both
+   color schemes because every value here is a --dsw-* theme token. */
+.chip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  height: 26px;
+  padding: 0 10px;
+  border: 1px solid var(--dsw-alias-border-l1);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--dsw-alias-label-secondary);
+  font-size: 11px;
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.chip:hover {
+  background: var(--dsw-alias-bg-layer-2);
+  border-color: var(--dsw-alias-border-l2);
+}
+
+.brand {
+  font-weight: 600;
+  color: var(--dsw-alias-label-primary);
+  opacity: 0.85;
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.label {
+  opacity: 0.7;
+}
+
+.track {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--dsw-alias-border-l1);
+  overflow: hidden;
+}
+
+.fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 999px;
+  transition: width 0.25s ease;
+}
+
+.value {
+  min-width: 27px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+}
+
+.toneOk.fill,
+.toneOk.rowFill {
+  background: var(--dsw-alias-state-success-primary);
+}
+
+.toneWarn.fill,
+.toneWarn.rowFill {
+  background: var(--dsw-alias-state-warn-primary);
+}
+
+.toneAlert.fill,
+.toneAlert.rowFill {
+  background: var(--dsw-alias-state-error-primary);
+}
+
+.toneOk.value {
+  color: var(--dsw-alias-state-success-primary);
+}
+
+.toneWarn.value {
+  color: var(--dsw-alias-state-warn-primary);
+}
+
+.toneAlert.value {
+  color: var(--dsw-alias-state-error-primary);
+}
+
+.toneAlert.dot {
+  background: var(--dsw-alias-state-error-primary);
+}
+
+.pop {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 10px);
+  z-index: 60;
+  width: 276px;
+  padding: 11px 12px;
+  border: 1px solid var(--dsw-alias-border-l2);
+  border-radius: 10px;
+  background: var(--dsw-alias-bg-overlay);
+  box-shadow: 0 10px 30px rgb(0 0 0 / 30%);
+  color: var(--dsw-alias-label-secondary);
+  font-size: 11.5px;
+  line-height: 1.5;
+  text-align: left;
+  cursor: default;
+}
+
+.popHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+  color: var(--dsw-alias-label-primary);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.row {
+  margin-bottom: 9px;
+}
+
+.rowTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.rowName {
+  color: var(--dsw-alias-label-primary);
+}
+
+.rowTrack {
+  height: 5px;
+  border-radius: 999px;
+  background: var(--dsw-alias-border-l1);
+  overflow: hidden;
+}
+
+.rowFill {
+  height: 100%;
+  border-radius: 999px;
+}
+
+.rowSub {
+  margin-top: 3px;
+  opacity: 0.72;
+}
+
+.popFoot {
+  margin-top: 2px;
+  padding-top: 7px;
+  border-top: 1px solid var(--dsw-alias-border-l1);
+  opacity: 0.72;
+}
+
+.err {
+  color: var(--dsw-alias-state-error-primary);
+}
