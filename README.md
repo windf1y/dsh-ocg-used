@@ -1,5 +1,7 @@
 # dsh-ocg-used
 
+[English](README.en.md)
+
 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 插件：在输入框右侧工具栏显示 OpenCode Go 套餐的剩余额度 —— 5 小时、一周、一个月三个窗口各一条进度条，鼠标悬停看已用比例、重置时间点和倒计时。
 
 ![输入框工具栏上的 OpenCode Go 套餐余量胶囊，以及悬停展开后的三个窗口面板](docs/screenshots/quota-chip.jpg)
@@ -30,8 +32,9 @@ dsh web
 装好后重启 `dsh web`（bundle 列表的变化在下次启动生效），工具栏就会出现胶囊。之后：
 
 ```sh
-# 更新到最新
-dsh plugin --profile web add --force github:windf1y/dsh-ocg-used
+# 更新到最新版本：当前 DSH 插件管理器需要先卸载再安装
+dsh plugin --profile web remove dsh-ocg-used
+dsh plugin --profile web add github:windf1y/dsh-ocg-used
 # 卸载
 dsh plugin --profile web remove dsh-ocg-used
 # 确认当前 profile 里装了什么
