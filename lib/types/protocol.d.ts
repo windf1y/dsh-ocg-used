@@ -46,14 +46,13 @@ export interface QuotaSnapshot {
  * Why a read failed, as a closed set the browser maps to localized copy.
  *
  * - `credentials-unavailable` — this deployment mounts no credential provider.
- * - `shell-unavailable` — this deployment mounts no shell executor.
  * - `key-unreadable` — the credential provider refused to resolve the key.
  * - `key-missing` — no `OPENCODE_GO_API_KEY` is configured.
- * - `request-failed` — the upstream call could not run or exited non-zero.
+ * - `request-failed` — the upstream call failed or returned a non-success status.
  * - `malformed-response` — the upstream body was not the expected JSON.
  * - `empty-usage` — the body carried no readable window.
  */
-export type QuotaErrorCode = 'credentials-unavailable' | 'shell-unavailable' | 'key-unreadable' | 'key-missing' | 'request-failed' | 'malformed-response' | 'empty-usage';
+export type QuotaErrorCode = 'credentials-unavailable' | 'key-unreadable' | 'key-missing' | 'request-failed' | 'malformed-response' | 'empty-usage';
 /** One failed read. */
 export interface QuotaFailure {
     readonly ok: false;

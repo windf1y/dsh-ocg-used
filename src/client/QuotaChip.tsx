@@ -44,7 +44,6 @@ const WINDOWS: readonly {
 /** Every failure code's dictionary key. */
 const ERROR_KEYS: Record<QuotaErrorCode, QuotaKey> = {
   'credentials-unavailable': 'error.credentials-unavailable',
-  'shell-unavailable': 'error.shell-unavailable',
   'key-unreadable': 'error.key-unreadable',
   'key-missing': 'error.key-missing',
   'request-failed': 'error.request-failed',

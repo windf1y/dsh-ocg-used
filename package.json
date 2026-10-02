@@ -65,8 +65,7 @@
     "@deepseek-ai/dsh-client-ui-renderer": "*",
     "@deepseek-ai/dsh-client-ui-slots": "*",
     "@deepseek-ai/dsh-credentials": "*",
-    "@deepseek-ai/dsh-host-webserver": "*",
-    "@deepseek-ai/dsh-shell": "*"
+    "@deepseek-ai/dsh-host-webserver": "*"
   },
   "peerDependenciesMeta": {
     "@deepseek-ai/dsh-client-connection": {
@@ -89,9 +88,6 @@
     },
     "@deepseek-ai/dsh-host-webserver": {
       "optional": true
-    },
-    "@deepseek-ai/dsh-shell": {
-      "optional": true
     }
   },
   "devDependencies": {
@@ -104,7 +100,6 @@
     "@deepseek-ai/dsh-client-ui-slots": "0.1.7-rc.1",
     "@deepseek-ai/dsh-credentials": "0.1.7-rc.1",
     "@deepseek-ai/dsh-host-webserver": "0.1.7-rc.1",
-    "@deepseek-ai/dsh-shell": "0.1.7-rc.1",
     "@types/node": "^22.0.0",
     "@types/react": "~18.3.1",
     "lightningcss": "^1.32.0",

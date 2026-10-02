@@ -33,7 +33,6 @@ export declare const zh: {
     readonly 'duration.hours': "{hours} 小时 {minutes} 分";
     readonly 'duration.minutes': "{minutes} 分钟";
     readonly 'error.credentials-unavailable': "凭据服务不可用";
-    readonly 'error.shell-unavailable': "命令执行服务不可用";
     readonly 'error.key-unreadable': "读取 OpenCode Go API Key 失败";
     readonly 'error.key-missing': "未配置 OPENCODE_GO_API_KEY";
     readonly 'error.request-failed': "请求 OpenCode Go 用量接口失败";

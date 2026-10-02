@@ -1,12 +1,12 @@
 /**
  * Host-side read of the OpenCode Go subscription usage: resolve the API key
- * through the credential seam, issue one `curl` through the shell seam, and
- * fold the provider's JSON into the browser-facing view.
+ * through the credential seam, issue one host-side HTTP request, and fold the
+ * provider's JSON into the browser-facing view.
  *
- * The key never reaches the command line — it travels in the child's
- * environment — and never reaches the browser, which sees percentages only.
+ * The key stays in the Host process and never reaches the browser, which sees
+ * percentages only.
  * This module carries no user-visible copy: failures travel as
- * {@link QuotaErrorCode} values plus raw program output.
+ * {@link QuotaErrorCode} values plus bounded upstream diagnostics.
  *
  * @module dsh-ocg-used/usage
  */
@@ -14,7 +14,6 @@
 import { brandString } from '@deepseek-ai/dsh-brand'
 import type { Context } from '@deepseek-ai/cordis'
 import type { CredentialRef } from '@deepseek-ai/dsh-credentials'
-import type {} from '@deepseek-ai/dsh-shell'
 import type { QuotaFailure, QuotaResult, QuotaWindowView } from './protocol.ts'
 
 /** OpenCode Go's subscription usage endpoint. */
@@ -23,10 +22,7 @@ const USAGE_URL = 'https://opencode.ai/zen/go/v1/usage'
 /** Credential reference holding the `opencode-go` provider key. */
 const API_KEY_REF = brandString<CredentialRef>('OPENCODE_GO_API_KEY')
 
-/** Child environment variable carrying the key into curl. */
-const KEY_ENV = 'DSH_OPENCODE_GO_QUOTA_KEY'
-
-/** Ceiling for the upstream call; the shell clamps it to its own maximum. */
+/** Ceiling for the upstream call. */
 const REQUEST_TIMEOUT_MS = 25_000
 
 /** Longest diagnostic slice handed to the browser. */
@@ -79,14 +75,12 @@ function readWindow(raw: unknown): QuotaWindowView | null {
 
 /**
  * Read the subscription usage once.
- * @param ctx - host context carrying the credential and shell seams.
+ * @param ctx - host context carrying the credential seam.
  * @returns the snapshot, or the coded failure the chip renders.
  */
 export async function readQuota(ctx: Context): Promise<QuotaResult> {
   const credentials = ctx.get('credentials')
   if (credentials === undefined) return failure('credentials-unavailable')
-  const shell = ctx.get('shell')
-  if (shell === undefined) return failure('shell-unavailable')
 
   let key: string | undefined
   try {
@@ -99,17 +93,19 @@ export async function readQuota(ctx: Context): Promise<QuotaResult> {
 
   let stdout: string
   try {
-    const spec = shell.resolve({
-      command: `curl -sS -m 20 -H "Authorization: Bearer $${KEY_ENV}" ${USAGE_URL}`,
-      env: { [KEY_ENV]: key },
-      timeoutMs: REQUEST_TIMEOUT_MS,
+    const response = await fetch(USAGE_URL, {
+      headers: {
+        Authorization: `Bearer ${key}`,
+        Accept: 'application/json',
+      },
+      redirect: 'error',
+      signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
     })
-    const run = await (await shell.execute(spec)).result()
-    if (run.exitCode !== 0) {
-      const detail = run.stderr.text.trim().slice(0, DETAIL_LIMIT)
-      return failure('request-failed', detail === '' ? `exit ${String(run.exitCode)}` : detail)
+    stdout = (await response.text()).trim()
+    if (!response.ok) {
+      const detail = stdout.slice(0, DETAIL_LIMIT)
+      return failure('request-failed', detail === '' ? `HTTP ${String(response.status)}` : `HTTP ${String(response.status)}: ${detail}`)
     }
-    stdout = run.stdout.text.trim()
   } catch (error) {
     return failure('request-failed', messageOf(error).slice(0, DETAIL_LIMIT))
   }

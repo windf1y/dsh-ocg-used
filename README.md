@@ -74,7 +74,7 @@ OPENCODE_GO_API_KEY=sk-…
 ## 工作原理
 
 - `src/index.ts`（Host 半）：向 `webServer` 注册只读路由 `GET /opencode-go/quota`，自己套用 Connection 的信任检查与浏览器认证（该路由不在 `/api` 通道上）；15 秒内复用同一次读取，因为上游请求本身就计入套餐用量。
-- `src/usage.ts`：通过凭据 seam 取 Key，通过 shell seam 执行一次 `curl`。Key 只走子进程环境变量，不进命令行，也永远不到浏览器；浏览器只拿到百分比。
+- `src/usage.ts`：通过凭据 seam 取 Key，在 Host 端使用 Node `fetch` 请求一次上游接口。这样 Linux、macOS、Windows 不依赖不同 shell 的命令和环境变量语法；Key 只进入 Host 请求 Header，也永远不到浏览器，浏览器只拿到百分比。
 - `src/protocol.ts`：两半共享的线上契约 —— 整数百分比、ISO 重置时刻、有限的失败码。Host 端不产出面向用户的文案，所有文案都在 client 词典里。
 - `src/client/`（浏览器半）：在 `conversation.input.right` 槽位注册一个控件，并注册 `opencodeGoQuota` 词典；CSS 走 CSS Modules，颜色全部取自 `--dsw-*` 主题 token。
 

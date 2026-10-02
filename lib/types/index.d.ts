@@ -1,6 +1,6 @@
 /**
  * OpenCode Go quota plugin, node half: one read-only JSON route the browser
- * half polls, over the host credential and shell seams and behind the
+ * half polls, over the host credential seam and behind the
  * Connection trust fence. The browser half ships via `exports["./client"]`,
  * discovered through the package.json `dsh.client` declaration.
  *
